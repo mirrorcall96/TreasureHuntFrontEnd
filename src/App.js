@@ -1,24 +1,33 @@
-import logo from './logo.svg';
-import './App.css';
+import "@elastic/eui/dist/eui_theme_light.css";
+import NavList from "./components/NavList";
+import UserRoutes from "./routes/UserRoutes";
+import ItemRoutes from "./routes/ItemRoutes";
+import { EuiEmptyPrompt } from "@elastic/eui";
+import { Switch, Route } from "react-router";
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <NavList />
+      <UserRoutes />
+      <ItemRoutes />
+      <Switch>
+        <Route exact path="/403">
+          <EuiEmptyPrompt
+            iconType="alert"
+            iconColor="danger"
+            title={<h2>403 Forbidden</h2>}
+          />
+        </Route>
+        <Route exact path="/404">
+          <EuiEmptyPrompt
+            iconType="alert"
+            iconColor="danger"
+            title={<h2>404 Not Found</h2>}
+          />
+        </Route>
+      </Switch>
+    </>
   );
 }
 
